@@ -1,0 +1,16 @@
+.logo {
+    width: 40px;
+    animation: rotate 4s linear infinite;
+    &:hover {
+        filter: drop-shadow(0 0 1em rgb(8, 210, 221));
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
