@@ -1,8 +1,14 @@
+body {
+    h1, h3{
+        font-weight: bold;
+    }
+}
+
 .logo {
     width: 40px;
     animation: rotate 4s linear infinite;
     &:hover {
-        filter: drop-shadow(0 0 1em rgb(8, 210, 221));
+        filter: drop-shadow(0 0 1.2rem rgb(8, 210, 221));
     }
 }
 
@@ -13,4 +19,20 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.overview {
+  font-size: 0.9rem;
+}
+
+.robot {
+    width: 60%;
+    height: 60%;
+}
+
+.card {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
