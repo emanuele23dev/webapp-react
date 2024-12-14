@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ReviewForm from "../components/ReviewForm";
 
 export default function SingleMovie() {
   const { id } = useParams();
@@ -14,6 +15,10 @@ export default function SingleMovie() {
   if (!movie) return <div>Movie not found</div>;
 
   return (
+
+    <>
+
+    <ReviewForm movie_id={id}/>
     
     <div className="container mt-5">
       <h1 className="text-center mb-4">Dettagli Film</h1>
@@ -35,7 +40,14 @@ export default function SingleMovie() {
             <div className="card">
               <div className="card-body">
                 <h5>{review.name}</h5>
-                <div className="badge bg-dark mb-2">Voto: {review.vote}/5</div>
+                <div className="mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <i 
+                      key={i}
+                      className={`bi ${i < review.vote ? 'bi-star-fill' : 'bi-star'} rating me-1`}
+                    ></i>
+                  ))}
+                </div>
                 <p>"{review.text}"</p>
               </div>
             </div>
@@ -46,5 +58,6 @@ export default function SingleMovie() {
       <a href="/"><button className="btn btn-dark">Torna alla Home</button></a>
       </div>
     </div>
+    </>
   );
 }
