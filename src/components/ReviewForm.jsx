@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ReviewForm({movie_id}) {
+export default function ReviewForm({movie_id, onReviewAdded}) {
 
     const [name, setName] = useState("");
     const [rating, setRating] = useState(0);
@@ -34,6 +34,12 @@ export default function ReviewForm({movie_id}) {
         .then(res => res.json())
         .then(data => {
             setSuccess("Recensione inviata con successo");
+            onReviewAdded({
+                id: Date.now(),
+                name: name,
+                text: review,
+                vote: rating
+            });
             setName("");
             setReview("");
             setRating(0);
