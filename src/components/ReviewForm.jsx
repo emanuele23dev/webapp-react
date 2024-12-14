@@ -20,7 +20,7 @@ export default function ReviewForm({movie_id}) {
         setError(null);
         const formData = {
             name,
-            text: review,
+            // text: review,
             vote: rating
         }
 
