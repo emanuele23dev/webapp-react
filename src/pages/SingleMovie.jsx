@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ReviewForm from "../components/ReviewForm";
+import GlobalContext from "../contexts/GlobalContext";
+import Loader from "../components/Loader";
+
 
 export default function SingleMovie() {
   const { id } = useParams();
+  const { loading, setLoading } = useContext(GlobalContext);
   const [movie, setMovie] = useState(null);
 
   const handleNewReview = (newReview) => {
@@ -14,15 +18,25 @@ export default function SingleMovie() {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:3001/api/movies/${id}`)
       .then(response => response.json())
-      .then(data => setMovie(data));
-  }, [id]);
+      .then(data => {
+        setMovie(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Errore nel caricamento del film:', error);
+        setLoading(false);
+      });
+  }, [id, setLoading]);
 
-  if (!movie) return <div>Movie not found</div>;
+  if (loading) return <Loader />;
+  if (!movie) return <div>Film non trovato</div>;
 
   return (
     <>
+    {loading && <Loader />}
       <ReviewForm movie_id={id} onReviewAdded={handleNewReview} />
       <div className="container mt-5">
         <h1 className="text-center mb-4">Dettagli Film</h1>

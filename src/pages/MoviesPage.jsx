@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard"
+import Loader from "../components/Loader"
 
 
 export default function MoviesPage() {
@@ -12,7 +13,7 @@ export default function MoviesPage() {
       .catch(error => console.error('Errore:', error));
   }, []);
 
-  if (!movies.length) return <div className="text-center">Caricamento...</div>;
+  if (!movies.length) return <Loader />;
 
   return (
    <>
